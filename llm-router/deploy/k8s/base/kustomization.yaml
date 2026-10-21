@@ -1,0 +1,44 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: llm-router
+resources:
+  - namespace.yaml
+  - services.yaml
+  - ollama-externalname.yaml
+  - redis.yaml
+  - router.yaml
+  - gateway.yaml
+  - frontend.yaml
+  - benchmark-results-pvc.yaml
+  - ingress.yaml
+  - gateway-hpa.yaml
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    app.kubernetes.io/managed-by: kustomize
+configMapGenerator:
+  - name: llm-router-config
+    files:
+      - models.yaml=../../../config/models.yaml
+      - routing.yaml=../../../config/routing.yaml
+      - server.yaml=../../../config/server.yaml
+  - name: llm-router-runtime
+    literals:
+      - ROUTER_HOST=0.0.0.0
+      - ROUTER_PORT=8081
+      - SERVER_CONFIG=/app/config/server.yaml
+      - MODELS_CONFIG=/app/config/models.yaml
+      - ROUTING_CONFIG=/app/config/routing.yaml
+      - OLLAMA_URL=http://ollama:11434
+      - REDIS_URL=redis://redis:6379
+      - CACHE_ENABLED=true
+      - CACHE_TTL_SECONDS=3600
+      - GATEWAY_HOST=0.0.0.0
+      - GATEWAY_PORT=3000
+      - ROUTER_URL=http://router:8081
+      - CORS_ORIGINS=http://llm-router.local
+      - BENCHMARK_ENABLED=true
+      - BENCH_BACKEND=Ollama local inference
+      - BENCH_RESULTS_DIR=bench/results
+      - PROJECT_ROOT=..
+      - LOG_LEVEL=info

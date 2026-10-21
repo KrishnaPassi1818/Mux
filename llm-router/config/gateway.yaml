@@ -1,0 +1,14 @@
+# Gateway defaults; process environment variables override each field.
+gateway:
+  host: 0.0.0.0
+  port: 3000
+  router_url: http://localhost:8081
+  cors_origins: http://localhost:5173,http://localhost:8080
+  rate_limit_per_min: 60
+  rate_limit_window_ms: 60000
+  max_request_bytes: 65536
+  request_timeout_ms: 330000
+  log_level: info
+  benchmark_enabled: true
+  bench_results_dir: bench/results
+  project_root: ..

@@ -1,0 +1,149 @@
+name: llm-router
+services:
+  router:
+    build:
+      context: .
+      dockerfile: deploy/docker/router.Dockerfile
+    environment:
+      ROUTER_HOST: 0.0.0.0
+      ROUTER_PORT: "8081"
+      SERVER_CONFIG: /app/config/server.yaml
+      MODELS_CONFIG: /app/config/models.yaml
+      ROUTING_CONFIG: /app/config/routing.yaml
+      OLLAMA_URL: ${COMPOSE_OLLAMA_URL:-http://host.docker.internal:11434}
+      REDIS_URL: redis://redis:6379
+      RUST_LOG: ${RUST_LOG:-info}
+      CACHE_ENABLED: "true"
+      CACHE_TTL_SECONDS: "3600"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      redis:
+        condition: service_started
+    expose:
+      - "8081"
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,noexec,nosuid
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail --silent http://127.0.0.1:8081/healthz >/dev/null"]
+      interval: 15s
+      timeout: 3s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+    networks: [llm-router]
+
+  gateway:
+    build:
+      context: .
+      dockerfile: deploy/docker/gateway.Dockerfile
+    environment:
+      NODE_ENV: production
+      GATEWAY_HOST: 0.0.0.0
+      GATEWAY_PORT: "3000"
+      ROUTER_URL: http://router:8081
+      CORS_ORIGINS: ${COMPOSE_CORS_ORIGINS:-http://localhost:8080}
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      BENCHMARK_ENABLED: ${BENCHMARK_ENABLED:-true}
+      BENCH_BACKEND: ${BENCH_BACKEND:-auto}
+      BENCH_RESULTS_DIR: bench/results
+      PROJECT_ROOT: ..
+    depends_on:
+      router:
+        condition: service_healthy
+    expose:
+      - "3000"
+    volumes:
+      - benchmark-results:/app/bench/results
+    read_only: true
+    tmpfs:
+      - /tmp:size=32m,noexec,nosuid
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3000/api/health').then(r=>process.exit(r.status<500?0:1)).catch(()=>process.exit(1))"]
+      interval: 15s
+      timeout: 4s
+      retries: 3
+      start_period: 10s
+    restart: unless-stopped
+    networks: [llm-router]
+
+  frontend:
+    build:
+      context: .
+      dockerfile: deploy/docker/frontend.Dockerfile
+    ports:
+      - "${FRONTEND_PORT:-8080}:8080"
+    depends_on:
+      gateway:
+        condition: service_healthy
+    read_only: true
+    tmpfs:
+      - /tmp:size=16m,noexec,nosuid
+      - /var/cache/nginx:size=32m,noexec,nosuid
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    healthcheck:
+      test: ["CMD-SHELL", "wget --quiet --tries=1 --spider http://127.0.0.1:8080/"]
+      interval: 15s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    restart: unless-stopped
+    networks: [llm-router]
+
+  redis:
+    image: redis:7.4.2-alpine
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory", "256mb", "--maxmemory-policy", "allkeys-lru"]
+    volumes:
+      - redis-data:/data
+    expose:
+      - "6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+    networks: [llm-router]
+
+  mock-ollama:
+    profiles: [mock]
+    build:
+      context: .
+      dockerfile: tools/mock-ollama/Dockerfile
+    expose:
+      - "11434"
+    read_only: true
+    tmpfs:
+      - /tmp:size=8m,noexec,nosuid
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:11434/api/tags').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 2s
+      retries: 3
+      start_period: 2s
+    restart: unless-stopped
+    networks: [llm-router]
+
+volumes:
+  redis-data:
+  benchmark-results:
+
+networks:
+  llm-router:
+    driver: bridge

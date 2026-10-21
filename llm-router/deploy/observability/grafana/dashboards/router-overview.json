@@ -1,0 +1,29 @@
+{
+  "annotations": { "list": [] },
+  "editable": false,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 1,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    { "datasource": { "type": "prometheus", "uid": "prometheus" }, "fieldConfig": { "defaults": { "unit": "reqps" }, "overrides": [] }, "gridPos": { "h": 8, "w": 8, "x": 0, "y": 0 }, "id": 1, "targets": [{ "expr": "sum(rate(llmr_requests_total[5m]))", "legendFormat": "router", "refId": "A" }, { "expr": "sum(rate(llmr_gateway_http_requests_total[5m]))", "legendFormat": "gateway", "refId": "B" }], "title": "Request rate", "type": "timeseries" },
+    { "datasource": { "type": "prometheus", "uid": "prometheus" }, "fieldConfig": { "defaults": { "unit": "s" }, "overrides": [] }, "gridPos": { "h": 8, "w": 8, "x": 8, "y": 0 }, "id": 2, "targets": [{ "expr": "histogram_quantile(0.50, sum(rate(llmr_request_duration_seconds_bucket[5m])) by (le))", "legendFormat": "p50", "refId": "A" }, { "expr": "histogram_quantile(0.95, sum(rate(llmr_request_duration_seconds_bucket[5m])) by (le))", "legendFormat": "p95", "refId": "B" }], "title": "Router latency", "type": "timeseries" },
+    { "datasource": { "type": "prometheus", "uid": "prometheus" }, "fieldConfig": { "defaults": { "unit": "percentunit", "min": 0, "max": 1 }, "overrides": [] }, "gridPos": { "h": 8, "w": 8, "x": 16, "y": 0 }, "id": 3, "targets": [{ "expr": "sum(rate(llmr_cache_hits_total[5m])) / clamp_min(sum(rate(llmr_cache_hits_total[5m])) + sum(rate(llmr_cache_misses_total[5m])), 0.000001)", "legendFormat": "cache hit ratio", "refId": "A" }], "title": "Cache hit rate", "type": "timeseries" },
+    { "datasource": { "type": "prometheus", "uid": "prometheus" }, "fieldConfig": { "defaults": { "unit": "short" }, "overrides": [] }, "gridPos": { "h": 8, "w": 8, "x": 0, "y": 8 }, "id": 4, "targets": [{ "expr": "sum by (tier) (rate(llmr_requests_by_tier_total[5m]))", "legendFormat": "{{tier}}", "refId": "A" }], "title": "Routing by tier", "type": "timeseries" },
+    { "datasource": { "type": "prometheus", "uid": "prometheus" }, "fieldConfig": { "defaults": { "unit": "s" }, "overrides": [] }, "gridPos": { "h": 8, "w": 8, "x": 8, "y": 8 }, "id": 5, "targets": [{ "expr": "histogram_quantile(0.95, sum(rate(llmr_ttft_seconds_bucket[5m])) by (le))", "legendFormat": "p95 TTFT", "refId": "A" }], "title": "Time to first token", "type": "timeseries" },
+    { "datasource": { "type": "prometheus", "uid": "prometheus" }, "fieldConfig": { "defaults": { "unit": "short" }, "overrides": [] }, "gridPos": { "h": 8, "w": 8, "x": 16, "y": 8 }, "id": 6, "targets": [{ "expr": "sum(rate(llmr_model_swaps_total[5m]))", "legendFormat": "swaps/s", "refId": "A" }, { "expr": "sum(rate(llmr_fallbacks_total[5m]))", "legendFormat": "fallbacks/s", "refId": "B" }], "title": "Model swaps and fallbacks", "type": "timeseries" },
+    { "datasource": { "type": "prometheus", "uid": "prometheus" }, "fieldConfig": { "defaults": { "unit": "short" }, "overrides": [] }, "gridPos": { "h": 8, "w": 12, "x": 0, "y": 16 }, "id": 7, "targets": [{ "expr": "llmr_queue_depth", "legendFormat": "{{model}}", "refId": "A" }], "title": "Queue depth by model", "type": "timeseries" },
+    { "datasource": { "type": "prometheus", "uid": "prometheus" }, "fieldConfig": { "defaults": { "unit": "short" }, "overrides": [] }, "gridPos": { "h": 8, "w": 12, "x": 12, "y": 16 }, "id": 8, "targets": [{ "expr": "llmr_partial_offload_total", "legendFormat": "partial VRAM offloads", "refId": "A" }, { "expr": "llmr_client_aborts_total", "legendFormat": "client stream aborts", "refId": "B" }, { "expr": "llmr_cache_errors_total", "legendFormat": "cache errors", "refId": "C" }], "title": "Capacity and resilience counters", "type": "timeseries" }
+  ],
+  "refresh": "15s",
+  "schemaVersion": 39,
+  "tags": ["llm-router", "prometheus", "local-inference"],
+  "templating": { "list": [] },
+  "time": { "from": "now-6h", "to": "now" },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "LLM Router Overview",
+  "uid": "llm-router-overview",
+  "version": 1
+}

@@ -1,0 +1,446 @@
+[
+  {
+    "id": "simple-001",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "Hi"
+  },
+  {
+    "id": "simple-002",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "Hello!"
+  },
+  {
+    "id": "simple-003",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "Thanks for your help."
+  },
+  {
+    "id": "simple-004",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "What is DNS?"
+  },
+  {
+    "id": "simple-005",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "Define gravity."
+  },
+  {
+    "id": "simple-006",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "What does HTTP stand for?"
+  },
+  {
+    "id": "simple-007",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "What is the capital of Japan?"
+  },
+  {
+    "id": "simple-008",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "How many days are in a week?"
+  },
+  {
+    "id": "simple-009",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "Translate ‘good morning’ to French."
+  },
+  {
+    "id": "simple-010",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "Give me one synonym for quick."
+  },
+  {
+    "id": "simple-011",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "What is eight times seven?"
+  },
+  {
+    "id": "simple-012",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "Name the largest ocean."
+  },
+  {
+    "id": "simple-013",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "Summarize this sentence in one line: Birds fly south."
+  },
+  {
+    "id": "simple-014",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "What is a browser cookie?"
+  },
+  {
+    "id": "simple-015",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "Is water wet?"
+  },
+  {
+    "id": "simple-016",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "How do I boil an egg?"
+  },
+  {
+    "id": "simple-017",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "What time zone does UTC use?"
+  },
+  {
+    "id": "simple-018",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "Give me a color that pairs with navy."
+  },
+  {
+    "id": "simple-019",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "What is photosynthesis?"
+  },
+  {
+    "id": "simple-020",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "Tell me a short joke."
+  },
+  {
+    "id": "code-001",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Write a Python function that reverses a string without changing punctuation."
+  },
+  {
+    "id": "code-002",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Debug this JavaScript function; it returns undefined for the final array item."
+  },
+  {
+    "id": "code-003",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Show a SQL query that joins customers to orders and groups by month."
+  },
+  {
+    "id": "code-004",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Refactor this Rust method to avoid cloning the input vector."
+  },
+  {
+    "id": "code-005",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Explain this Python traceback and fix the IndexError in the loop."
+  },
+  {
+    "id": "code-006",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Write a regular expression that validates an email address conservatively."
+  },
+  {
+    "id": "code-007",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Implement binary search in Java and include tests for an empty array."
+  },
+  {
+    "id": "code-008",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Interpret this stack trace and fix the null pointer exception in my service."
+  },
+  {
+    "id": "code-009",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Create a Dockerfile for a Node.js API using a non-root runtime user."
+  },
+  {
+    "id": "code-010",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Review this code: ```js const total = items.map(x => x.price) ``` and correct the bug."
+  },
+  {
+    "id": "code-011",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Design an algorithm to find duplicate values in a list in linear time."
+  },
+  {
+    "id": "code-012",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Use the TypeScript API client to make a typed POST request with abort support."
+  },
+  {
+    "id": "code-013",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Write a Bash script that checks whether a directory exists before copying files."
+  },
+  {
+    "id": "code-014",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Why does this C++ compiler error say no matching function for the call?"
+  },
+  {
+    "id": "code-015",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Create a Python unit test for a function that normalizes Unicode text."
+  },
+  {
+    "id": "code-016",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Convert this Java class to use a generic repository interface."
+  },
+  {
+    "id": "code-017",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Help me debug a failing React hook that has an exhaustive-deps warning."
+  },
+  {
+    "id": "code-018",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Write a PostgreSQL migration that adds a nullable index safely."
+  },
+  {
+    "id": "code-019",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Explain how to catch and rethrow an exception in Go with context."
+  },
+  {
+    "id": "code-020",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Produce a minimal HTML form and validate its fields with JavaScript."
+  },
+  {
+    "id": "complex-001",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "Compare a centralized queue with per-model queues for a local inference service. Analyze fairness, tail latency, cancellation behavior, and the effect of one slow model. Derive a recommendation for a single GPU that can load only one model at a time, and state which assumptions should be measured before deployment."
+  },
+  {
+    "id": "complex-002",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "Design a step by step migration from a monolith to independently deployed services for a small team. Evaluate operational overhead, failure isolation, data ownership, and release risk. Compare a modular monolith as an alternative, then derive a decision rule that would tell the team when splitting a boundary is justified."
+  },
+  {
+    "id": "complex-003",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "Analyze the trade-off between keeping one model warm and choosing the model with the highest estimated answer quality. Compare user-perceived latency, memory pressure, and workload predictability. Propose a policy with explicit boundary conditions, explain how it behaves for programming requests, and identify evidence that could falsify the policy."
+  },
+  {
+    "id": "complex-004",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "Evaluate three strategies for reducing p95 latency in a local service: response caching, model warm-up, and request batching. Compare their effects on throughput, freshness, and resource use. Derive an experiment plan with a control group, a repeatable workload, and clear criteria for accepting a change without overstating the results."
+  },
+  {
+    "id": "complex-005",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "Design a resilient deployment for a privacy-sensitive assistant that must continue working when Redis is unavailable. Analyze which features should degrade, which failures should be visible to users, and how complete-response caching can avoid corrupt entries. Compare fail-open and fail-closed behavior, then justify the safest default for a single-user local environment."
+  },
+  {
+    "id": "complex-006",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "Compare request-level retries with a single fallback to an adjacent model after a timeout. Analyze duplicate generation, partial output, cancellation, and the possibility of making overload worse. Derive a bounded retry policy, explain which events belong in the stream, and list the metrics needed to confirm that fallback improves completion rate."
+  },
+  {
+    "id": "complex-007",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "A laptop has limited GPU memory and several local model tiers with different load times. Analyze how prompt length, programming intent, queue depth, and current loaded-model state should influence routing. Propose a scoring approach, compare it with a learned classifier, and explain how to tune thresholds using a labeled set without leaking benchmark answers into evaluation."
+  },
+  {
+    "id": "complex-008",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "Evaluate whether a request gateway should own model selection or only validate and proxy requests. Compare maintainability, latency, observability, and the risk of different clients applying different rules. Derive a clear separation of responsibilities for a browser UI, an edge service, and a dedicated routing engine, including where contract validation should occur."
+  },
+  {
+    "id": "complex-009",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "Design an observability plan for a streaming inference router that protects user privacy. Analyze which identifiers and timing values are useful, which prompt fields must never be logged, and how metric labels can create cardinality problems. Compare structured logs with traces, then provide a minimal measurement set that lets an operator diagnose timeouts and model swaps."
+  },
+  {
+    "id": "complex-010",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "Compare exact-match caching with semantic caching for local language-model responses. Analyze normalization, false hits, privacy, embedding cost, and how temperature affects repeatability. Derive a staged adoption plan that first validates exact caching, then measures semantic similarity thresholds against a labeled set before enabling approximate reuse."
+  },
+  {
+    "id": "complex-011",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "A team reports that routing is thirty percent faster than always using its largest model. Analyze the evidence required to support that claim, including warm-up policy, prompt ordering, cache state, outliers, and hardware details. Design a fair A/B/C methodology, compare mean and percentile latency, and explain how to report a missed target honestly."
+  },
+  {
+    "id": "complex-012",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "Evaluate how a service should handle a browser disconnect during a long generation. Trace cancellation through the UI, gateway, router, queue permit, and model HTTP stream. Compare eager cancellation with allowing inference to finish for cache reuse, then derive a policy that avoids wasted compute without storing partial or unwanted output."
+  },
+  {
+    "id": "complex-013",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "Compare scaling the gateway horizontally with scaling inference workers when every worker shares one physical GPU. Analyze queue duplication, model memory residency, fairness, and autoscaling signals. Propose a Kubernetes deployment that demonstrates safe orchestration while clearly explaining why additional replicas do not create additional GPU capacity."
+  },
+  {
+    "id": "complex-014",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "Design a deterministic classifier evaluation suite for three routing tiers. Analyze class balance, duplicate prompts, ambiguous boundary cases, Unicode, long context, and programming terminology. Compare accuracy with per-class recall, derive a threshold-tuning procedure, and explain how a separate holdout set prevents the team from simply overfitting its demo prompts."
+  },
+  {
+    "id": "complex-015",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "A local assistant must support both automatic selection and a user-forced model. Analyze how cache keys should interact with model override, temperature, top-p, and context size. Compare including every option in the key with bypassing the cache for forced requests, then justify a policy that never returns an answer from a different model when the user explicitly chose one."
+  },
+  {
+    "id": "complex-016",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "Compare polling a model server for its loaded state with inferring warmth from recent request history. Analyze state staleness, process restarts, partial GPU offload, and the cost of an extra health request. Derive a safe hybrid policy that prefers observed state but degrades gracefully when the model service stops reporting runtime details."
+  },
+  {
+    "id": "complex-017",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "Design an input-validation strategy for a public local gateway that accepts multi-turn messages. Analyze role allow-lists, total byte limits, message-count limits, malformed JSON, and rate limiting. Compare validation only at the edge with defense-in-depth validation at both edge and router, and explain how contract errors should be represented in JSON and streaming responses."
+  },
+  {
+    "id": "complex-018",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "Evaluate three ways to keep a local demo usable without a GPU: prerecorded output, a deterministic test backend, and a lightweight real model. Compare realism, reproducibility, setup time, and the risk of confusing simulated performance with hardware measurements. Derive a demo plan that visibly labels simulated behavior and keeps production service paths testable."
+  },
+  {
+    "id": "complex-019",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "A dashboard shows estimated time saved relative to a heavy-model baseline. Analyze the assumptions required for that estimate, including tokens per second, model load cost, cache hits, and prompt distribution. Compare a calibrated live estimate with a benchmark measurement, then design wording and visual cues that prevent users from mistaking one for the other."
+  },
+  {
+    "id": "complex-020",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "Compare two shutdown strategies for a streaming router: immediate process termination and graceful draining. Analyze in-flight inference, client disconnects, queue permits, Redis writes, and container termination deadlines. Derive a shutdown sequence that stops accepting work, allows bounded completion, cancels remaining streams, and leaves health probes truthful during termination."
+  },
+  {
+    "id": "dup-simple-001",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "Hi",
+    "duplicate_of": "simple-001"
+  },
+  {
+    "id": "dup-simple-005",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "Define gravity.",
+    "duplicate_of": "simple-005"
+  },
+  {
+    "id": "dup-simple-011",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "What is eight times seven?",
+    "duplicate_of": "simple-011"
+  },
+  {
+    "id": "dup-simple-016",
+    "category": "simple",
+    "expected_tier": "light",
+    "prompt": "How do I boil an egg?",
+    "duplicate_of": "simple-016"
+  },
+  {
+    "id": "dup-code-002",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Debug this JavaScript function; it returns undefined for the final array item.",
+    "duplicate_of": "code-002"
+  },
+  {
+    "id": "dup-code-006",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Write a regular expression that validates an email address conservatively.",
+    "duplicate_of": "code-006"
+  },
+  {
+    "id": "dup-code-010",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Review this code: ```js const total = items.map(x => x.price) ``` and correct the bug.",
+    "duplicate_of": "code-010"
+  },
+  {
+    "id": "dup-code-015",
+    "category": "code",
+    "expected_tier": "code",
+    "prompt": "Create a Python unit test for a function that normalizes Unicode text.",
+    "duplicate_of": "code-015"
+  },
+  {
+    "id": "dup-complex-001",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "Compare a centralized queue with per-model queues for a local inference service. Analyze fairness, tail latency, cancellation behavior, and the effect of one slow model. Derive a recommendation for a single GPU that can load only one model at a time, and state which assumptions should be measured before deployment.",
+    "duplicate_of": "complex-001"
+  },
+  {
+    "id": "dup-complex-004",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "Evaluate three strategies for reducing p95 latency in a local service: response caching, model warm-up, and request batching. Compare their effects on throughput, freshness, and resource use. Derive an experiment plan with a control group, a repeatable workload, and clear criteria for accepting a change without overstating the results.",
+    "duplicate_of": "complex-004"
+  },
+  {
+    "id": "dup-complex-011",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "A team reports that routing is thirty percent faster than always using its largest model. Analyze the evidence required to support that claim, including warm-up policy, prompt ordering, cache state, outliers, and hardware details. Design a fair A/B/C methodology, compare mean and percentile latency, and explain how to report a missed target honestly.",
+    "duplicate_of": "complex-011"
+  },
+  {
+    "id": "dup-complex-019",
+    "category": "complex",
+    "expected_tier": "heavy",
+    "prompt": "A dashboard shows estimated time saved relative to a heavy-model baseline. Analyze the assumptions required for that estimate, including tokens per second, model load cost, cache hits, and prompt distribution. Compare a calibrated live estimate with a benchmark measurement, then design wording and visual cues that prevent users from mistaking one for the other.",
+    "duplicate_of": "complex-019"
+  }
+]

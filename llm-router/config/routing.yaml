@@ -1,0 +1,75 @@
+# All classifier and policy tuning lives here; do not hard-code in source.
+classifier:
+  weights:
+    length: 0.35
+    reasoning: 0.30
+    structure: 0.20
+    context: 0.15
+  simplicity_penalty: 0.25
+  reasoning_min_score: 42
+  length_saturation_tokens: 160
+  reasoning_keywords:
+    - analyze
+    - analyse
+    - compare
+    - evaluate
+    - derive
+    - design
+    - why
+    - prove
+    - reason
+    - trade-off
+    - tradeoff
+    - step by step
+    - prove
+    - reason
+    - explain why
+    - multi-step
+    - optimize
+  code_keywords:
+    - write code
+    - code snippet
+    - code sample
+    - function
+    - debug
+    - stack trace
+    - traceback
+    - compiler
+    - refactor
+    - regex
+    - regular expression
+    - sql
+    - postgresql
+    - python
+    - typescript
+    - javascript
+    - rust
+    - java
+    - c++
+    - bash
+    - dockerfile
+    - design an algorithm
+    - implement an algorithm
+    - exception
+  simple_patterns:
+    - '^hi[!. ]*$'
+    - '^hello[!. ]*$'
+    - '^hey[!. ]*$'
+    - '^thanks?[!. ]*$'
+    - '^good morning[!. ]*$'
+    - '^good evening[!. ]*$'
+    - '^what is [^?]{1,80}\??$'
+    - '^define [^?]{1,80}\??$'
+routing:
+  light_max_score: 20
+  heavy_min_score: 30
+  warm_stickiness_margin: 8
+  max_queue_default: 6
+  queue_diversion_enabled: true
+  fallback_enabled: true
+  default_model: qwen2.5:1.5b
+  cache_ttl_seconds: 3600
+  cache_max_temperature: 0.2
+  estimated_heavy_tokens_per_second: 22
+  stats_window_seconds: 300
+  recent_decisions_limit: 50

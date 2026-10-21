@@ -1,0 +1,45 @@
+{
+  "name": "local-llm-router",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=24.22.0 <25",
+    "npm": ">=11"
+  },
+  "type": "module",
+  "workspaces": [
+    "gateway",
+    "frontend",
+    "tools/mock-ollama",
+    "tools/mock-router"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n router,gateway,frontend -c cyan,green,magenta \"cargo run --manifest-path router/Cargo.toml\" \"npm:dev --workspace=gateway\" \"npm:dev --workspace=frontend\"",
+    "dev:mock": "concurrently -k -n mock-router,gateway,frontend -c yellow,green,magenta \"npm:dev --workspace=@llm-router/mock-router\" \"npm:dev --workspace=gateway\" \"npm:dev --workspace=frontend\"",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "build": "npm run build --workspace=gateway && npm run build --workspace=frontend",
+    "typecheck": "npm run typecheck --workspaces --if-present && npm run bench:typecheck",
+    "gen:types": "npm run gen:types --workspace=gateway && npm run gen:types --workspace=frontend",
+    "bench": "tsx bench/run.ts",
+    "bench:typecheck": "tsc --noEmit -p bench/tsconfig.json",
+    "contracts:check": "node tools/validate-contracts.mjs",
+    "format": "prettier --write \"**/*.{ts,tsx,js,json,md,yml,yaml,css,html}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,json,md,yml,yaml,css,html}\""
+  },
+  "devDependencies": {
+    "@apidevtools/swagger-parser": "10.1.1",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "concurrently": "9.2.5",
+    "dotenv": "16.6.1",
+    "openapi-typescript": "7.8.0",
+    "prettier": "3.6.2",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3",
+    "yaml": "2.9.1"
+  },
+  "allowScripts": {
+    "esbuild@0.25.12": true
+  }
+}

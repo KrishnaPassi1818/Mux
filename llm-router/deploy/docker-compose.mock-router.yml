@@ -1,0 +1,18 @@
+services:
+  router:
+    build:
+      context: .
+      dockerfile: tools/mock-router/Dockerfile
+    environment:
+      ROUTER_HOST: 0.0.0.0
+      ROUTER_PORT: "8081"
+      MODELS_CONFIG: /workspace/config/models.yaml
+      ROUTING_CONFIG: /workspace/config/routing.yaml
+      MOCK_ROUTER_TOKEN_DELAY_MS: ${MOCK_ROUTER_TOKEN_DELAY_MS:-18}
+      MOCK_ROUTER_FIRST_TOKEN_MS: ${MOCK_ROUTER_FIRST_TOKEN_MS:-350}
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8081/healthz').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 2s
+      retries: 3
+      start_period: 2s

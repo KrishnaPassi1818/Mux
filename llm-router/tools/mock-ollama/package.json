@@ -1,0 +1,14 @@
+{
+  "name": "@llm-router/mock-ollama",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "yaml": "2.9.1"
+  }
+}

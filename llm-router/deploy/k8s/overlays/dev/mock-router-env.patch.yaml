@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: router
+spec:
+  template:
+    spec:
+      containers:
+        - name: router
+          env:
+            - name: OLLAMA_URL
+              value: http://mock-ollama:11434

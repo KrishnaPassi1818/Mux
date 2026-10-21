@@ -1,0 +1,12 @@
+# Runtime endpoints are overrideable via environment. Keep the standard local values here.
+server:
+  host: 0.0.0.0
+  port: 8081
+upstream:
+  ollama_url: http://localhost:11434
+  redis_url: redis://127.0.0.1:6379
+  request_timeout_ms: 300000
+cache:
+  enabled: true
+  ttl_seconds: 3600
+  max_temperature: 0.2

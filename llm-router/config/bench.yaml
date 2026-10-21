@@ -1,0 +1,12 @@
+# Runner defaults. Every field can be overridden by the environment.
+gateway_url: http://localhost:3000
+prompt_file: bench/prompts.json
+results_dir: bench/results
+request_timeout_ms: 330000
+rate_limit_retry_ms: 60000
+max_rate_limit_retries: 8
+hardware: null
+gpu: NVIDIA GeForce RTX 4050 Laptop GPU (6GB VRAM)
+backend_mode: Ollama local inference
+kpi_routing_accuracy_target: 0.85
+kpi_latency_reduction_target_pct: 30

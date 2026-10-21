@@ -1,0 +1,1 @@
+{"request_id":"00000000-0000-4000-8000-000000000001","model":"gemma3:4b","tier":"light","score":12,"intent":"chat","reason":"short factual question","cache":"miss","swap_expected":false,"fallback_from":null}

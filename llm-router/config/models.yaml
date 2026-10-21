@@ -1,0 +1,23 @@
+# Registry — model names are tags in the local Ollama installation.
+models:
+  - name: qwen2.5:1.5b
+    tier: light
+    max_concurrency: 1
+    timeout_ms: 45000
+    max_queue: 6
+    fallback: qwen2.5-coder:7b
+    size_bytes: 986061892
+  - name: qwen2.5-coder:7b
+    tier: code
+    max_concurrency: 1
+    timeout_ms: 90000
+    max_queue: 6
+    fallback: llama3.1:8b
+    size_bytes: 4700000000
+  - name: llama3.1:8b
+    tier: heavy
+    max_concurrency: 1
+    timeout_ms: 300000
+    max_queue: 4
+    fallback: qwen2.5:1.5b
+    size_bytes: 4900000000

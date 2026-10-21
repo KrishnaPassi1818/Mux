@@ -1,0 +1,13 @@
+{
+  "name": "@llm-router/mock-router",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs"
+  },
+  "dependencies": {
+    "yaml": "2.9.1"
+  }
+}

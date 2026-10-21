@@ -1,0 +1,422 @@
+openapi: 3.1.0
+info:
+  title: LLM Router API
+  version: 1.0.0
+  description: Contracts-first API for the local Ollama model router.
+servers:
+  - url: http://localhost:3000
+    description: Node gateway
+  - url: http://localhost:8081
+    description: Internal Rust router
+paths:
+  /api/health:
+    get:
+      operationId: getHealth
+      summary: Aggregate gateway and upstream health
+      responses:
+        '200':
+          description: Health status (degraded dependencies are reported in the body)
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Health' }
+  /api/chat:
+    post:
+      operationId: streamChat
+      summary: Route a chat request and stream response events
+      parameters:
+        - $ref: '#/components/parameters/RequestId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ChatRequest' }
+      responses:
+        '200':
+          description: Server-sent events; event order is meta, token*, done (or error)
+          headers:
+            Cache-Control: { schema: { type: string } }
+            X-Accel-Buffering: { schema: { type: string } }
+            X-Request-Id: { schema: { type: string, format: uuid } }
+          content:
+            text/event-stream:
+              schema: { type: string }
+        '400': { $ref: '#/components/responses/BadRequest' }
+        '429': { $ref: '#/components/responses/RateLimited' }
+        '502': { $ref: '#/components/responses/UpstreamError' }
+  /api/route/preview:
+    post:
+      operationId: previewRoute
+      summary: Return a routing decision without inference
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/PreviewRequest' }
+      responses:
+        '200':
+          description: Route decision
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/RouteDecision' }
+        '400': { $ref: '#/components/responses/BadRequest' }
+  /api/models:
+    get:
+      operationId: listModels
+      summary: Configured model registry and runtime availability
+      responses:
+        '200':
+          description: Models grouped by tier
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [models]
+                properties:
+                  models:
+                    type: array
+                    items: { $ref: '#/components/schemas/Model' }
+  /api/stats:
+    get:
+      operationId: getStats
+      summary: Current rolling-window router statistics
+      responses:
+        '200':
+          description: Stats snapshot
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Stats' }
+  /api/stats/stream:
+    get:
+      operationId: streamStats
+      summary: Live stats snapshots (one event per second)
+      responses:
+        '200':
+          description: Server-sent stats snapshots
+          content:
+            text/event-stream:
+              schema: { type: string }
+  /api/cache/flush:
+    post:
+      operationId: flushCache
+      summary: Remove cached completions
+      responses:
+        '200':
+          description: Cache flush result
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [ok, removed]
+                properties:
+                  ok: { type: boolean }
+                  removed: { type: integer, minimum: 0 }
+        '502': { $ref: '#/components/responses/UpstreamError' }
+  /api/benchmark/results:
+    get:
+      operationId: listBenchmarkResults
+      summary: List committed and locally-generated benchmark results
+      responses:
+        '200':
+          description: Benchmark result files
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [results]
+                properties:
+                  results:
+                    type: array
+                    items: { $ref: '#/components/schemas/BenchmarkResult' }
+  /api/benchmark/run:
+    post:
+      operationId: runBenchmark
+      summary: Start the benchmark harness
+      responses:
+        '202':
+          description: Benchmark process started
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [ok, message]
+                properties:
+                  ok: { type: boolean }
+                  message: { type: string }
+        '409':
+          description: A benchmark is already running
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ErrorEnvelope' }
+components:
+  parameters:
+    RequestId:
+      name: x-request-id
+      in: header
+      required: false
+      schema: { type: string, format: uuid }
+  responses:
+    BadRequest:
+      description: Invalid request
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorEnvelope' }
+    RateLimited:
+      description: Rate limit exceeded
+      headers:
+        Retry-After: { schema: { type: integer } }
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorEnvelope' }
+    UpstreamError:
+      description: An upstream service failed
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorEnvelope' }
+  schemas:
+    Role:
+      type: string
+      enum: [system, user, assistant]
+    Tier:
+      type: string
+      enum: [light, code, heavy]
+    Intent:
+      type: string
+      enum: [chat, code, reasoning]
+    CacheStatus:
+      type: string
+      enum: [hit, miss, bypass]
+    Message:
+      type: object
+      additionalProperties: false
+      required: [role, content]
+      properties:
+        role: { $ref: '#/components/schemas/Role' }
+        content: { type: string, maxLength: 32768 }
+    ChatOptions:
+      type: object
+      additionalProperties: false
+      properties:
+        temperature: { type: number, minimum: 0, maximum: 2, default: 0.2 }
+        top_p: { type: number, exclusiveMinimum: 0, maximum: 1, default: 0.9 }
+        num_ctx: { type: integer, minimum: 256, maximum: 32768, default: 4096 }
+        num_predict: { type: integer, minimum: 1, maximum: 8192 }
+    ChatRequest:
+      type: object
+      additionalProperties: false
+      required: [messages]
+      properties:
+        messages:
+          type: array
+          minItems: 1
+          maxItems: 50
+          items: { $ref: '#/components/schemas/Message' }
+        mode: { type: string, enum: [auto, force], default: auto }
+        model: { type: string, minLength: 1, maxLength: 128 }
+        options: { $ref: '#/components/schemas/ChatOptions' }
+        use_cache: { type: boolean, default: true }
+    PreviewRequest:
+      type: object
+      additionalProperties: false
+      required: [messages]
+      properties:
+        messages:
+          type: array
+          minItems: 1
+          maxItems: 50
+          items: { $ref: '#/components/schemas/Message' }
+        mode: { type: string, enum: [auto, force], default: auto }
+        model: { type: string, minLength: 1, maxLength: 128 }
+    RouteDecision:
+      type: object
+      required: [model, tier, score, intent, reason, swap_expected]
+      properties:
+        model: { type: string }
+        tier: { $ref: '#/components/schemas/Tier' }
+        score: { type: integer, minimum: 0, maximum: 100 }
+        intent: { $ref: '#/components/schemas/Intent' }
+        reason: { type: string }
+        swap_expected: { type: boolean }
+        fallback: { type: [string, 'null'] }
+        queue_depth: { type: integer, minimum: 0 }
+    MetaEvent:
+      type: object
+      required: [request_id, model, tier, score, intent, reason, cache]
+      properties:
+        request_id: { type: string, format: uuid }
+        model: { type: string }
+        tier: { $ref: '#/components/schemas/Tier' }
+        score: { type: integer, minimum: 0, maximum: 100 }
+        intent: { $ref: '#/components/schemas/Intent' }
+        reason: { type: string }
+        cache: { $ref: '#/components/schemas/CacheStatus' }
+        swap_expected: { type: boolean }
+        fallback_from: { type: [string, 'null'] }
+    TokenEvent:
+      type: object
+      required: [text]
+      properties:
+        text: { type: string }
+    Usage:
+      type: object
+      required: [prompt_tokens, completion_tokens, ttft_ms, total_ms, tokens_per_sec, load_ms]
+      properties:
+        prompt_tokens: { type: integer, minimum: 0 }
+        completion_tokens: { type: integer, minimum: 0 }
+        ttft_ms: { type: number, minimum: 0 }
+        total_ms: { type: number, minimum: 0 }
+        tokens_per_sec: { type: number, minimum: 0 }
+        load_ms: { type: number, minimum: 0 }
+    DoneEvent:
+      type: object
+      required: [request_id, usage]
+      properties:
+        request_id: { type: string, format: uuid }
+        usage: { $ref: '#/components/schemas/Usage' }
+    ErrorEvent:
+      type: object
+      required: [code, message, request_id]
+      properties:
+        code:
+          type: string
+          enum: [INVALID_REQUEST, RATE_LIMITED, UPSTREAM_TIMEOUT, UPSTREAM_UNAVAILABLE, MODEL_NOT_FOUND, QUEUE_FULL, INTERNAL]
+        message: { type: string }
+        request_id: { type: string, format: uuid }
+    ErrorEnvelope:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message, request_id]
+          properties:
+            code: { type: string }
+            message: { type: string }
+            request_id: { type: string, format: uuid }
+            details: { type: [string, 'null'] }
+    Model:
+      type: object
+      required: [name, tier, available, max_concurrency, timeout_ms]
+      properties:
+        name: { type: string }
+        tier: { $ref: '#/components/schemas/Tier' }
+        available: { type: boolean }
+        loaded: { type: boolean }
+        max_concurrency: { type: integer }
+        timeout_ms: { type: integer }
+        size_bytes: { type: [integer, 'null'] }
+        size_vram_bytes: { type: [integer, 'null'] }
+    Health:
+      type: object
+      required: [status, services]
+      properties:
+        status: { type: string, enum: [healthy, degraded, unavailable] }
+        services:
+          type: object
+          additionalProperties:
+            type: object
+            required: [status]
+            properties:
+              status: { type: string, enum: [healthy, degraded, unavailable] }
+              latency_ms: { type: number }
+              detail: { type: string }
+        version: { type: string }
+    Stats:
+      type: object
+      required: [timestamp, window_seconds, requests_total, avg_latency_ms, cache, swaps, by_model, recent, queue_depth]
+      properties:
+        timestamp: { type: string, format: date-time }
+        window_seconds: { type: integer }
+        requests_total: { type: integer }
+        avg_latency_ms: { type: number }
+        cache:
+          type: object
+          required: [hits, misses, hit_rate]
+          properties:
+            hits: { type: integer }
+            misses: { type: integer }
+            hit_rate: { type: number, minimum: 0, maximum: 1 }
+        swaps: { type: integer }
+        by_model:
+          type: array
+          items:
+            type: object
+            required: [model, tier, count, avg_latency_ms]
+            properties:
+              model: { type: string }
+              tier: { $ref: '#/components/schemas/Tier' }
+              count: { type: integer }
+              avg_latency_ms: { type: number }
+              p95_latency_ms: { type: number }
+        recent:
+          type: array
+          items:
+            type: object
+            required: [id, timestamp, model, tier, score, intent, reason, latency_ms, cache]
+            properties:
+              id: { type: string }
+              timestamp: { type: string, format: date-time }
+              model: { type: string }
+              tier: { $ref: '#/components/schemas/Tier' }
+              score: { type: integer }
+              intent: { $ref: '#/components/schemas/Intent' }
+              reason: { type: string }
+              latency_ms: { type: number }
+              cache: { $ref: '#/components/schemas/CacheStatus' }
+        queue_depth:
+          type: object
+          additionalProperties: { type: integer }
+        loaded_model: { type: [string, 'null'] }
+        gpu:
+          type: object
+          properties:
+            vram_used_bytes: { type: [integer, 'null'] }
+            vram_total_bytes: { type: [integer, 'null'] }
+            utilization_pct: { type: [number, 'null'] }
+        estimated_savings:
+          type: object
+          properties:
+            basis: { type: string, const: calibrated-estimate }
+            time_ms: { type: number }
+            pct_vs_heavy_only: { type: number }
+    BenchmarkMetric:
+      type: object
+      properties:
+        mean_ms: { type: number }
+        p50_ms: { type: number }
+        p95_ms: { type: number }
+        ttft_mean_ms: { type: number }
+        tokens_per_sec: { type: number }
+        swaps: { type: integer }
+        peak_vram_bytes: { type: integer }
+        cache_hit_rate: { type: number }
+        accuracy: { type: number }
+        total_wall_ms: { type: number }
+    BenchmarkResult:
+      type: object
+      required: [id, created_at, hardware, prompt_count, runs]
+      properties:
+        id: { type: string }
+        created_at: { type: string, format: date-time }
+        hardware: { type: string }
+        prompt_count: { type: integer }
+        methodology: { type: string }
+        verdict: { type: string }
+        runs:
+          type: object
+          properties:
+            A: { $ref: '#/components/schemas/BenchmarkMetric' }
+            B: { $ref: '#/components/schemas/BenchmarkMetric' }
+            C: { $ref: '#/components/schemas/BenchmarkMetric' }
+        per_request:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        confusion_matrix:
+          type: object
+          additionalProperties: { type: object, additionalProperties: { type: integer } }
+        kpis:
+          type: object
+          additionalProperties: { type: [string, 'number', 'boolean', 'null'] }
+  securitySchemes: {}
+security: []

@@ -1,0 +1,11 @@
+# The Ollama service is external to Kubernetes in the local-cluster setup.
+# Patch externalName for your cluster/host or replace this Service with a ClusterIP Service + Endpoints.
+apiVersion: v1
+kind: Service
+metadata:
+  name: ollama
+  labels:
+    app.kubernetes.io/name: ollama
+spec:
+  type: ExternalName
+  externalName: host.k3d.internal
