@@ -1,0 +1,25 @@
+# secrets / local config
+.env
+.env.*.local
+!.env.example
+!.env.mock
+# dependencies and build output
+node_modules/
+**/node_modules/
+**/dist/
+**/coverage/
+**/.vite/
+**/target/
+**/.next/
+*.log
+.DS_Store
+Thumbs.db
+# generated benchmark scratch; curated results may be committed
+bench/results/*.tmp.json
+bench/.smoke-results/
+bench/results/*.partial.json
+bench/results/.checkpoint*
+# local editor
+.vscode/
+.idea/
+*.swp
