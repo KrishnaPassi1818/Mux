@@ -12,7 +12,7 @@ COPY config ./config
 COPY frontend ./frontend
 RUN npm run build --workspace=@llm-router/frontend
 
-FROM nginxinc/nginx-unprivileged:1.27.5-alpine AS runtime
+FROM nginxinc/nginx-unprivileged:1.31.7-alpine AS runtime
 COPY deploy/docker/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/frontend/dist /usr/share/nginx/html
 EXPOSE 8080
