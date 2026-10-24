@@ -1,0 +1,341 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R 7 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Contents 6 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+6 0 obj
+<< /Length 3932 >>
+stream
+BT
+/F2 14 Tf
+35 800 Td
+(EVALUATION REPORT: ROUTER AUTO-SELECTION VS HEAVY-ONLY LLM) Tj
+ET
+BT
+/F1 8 Tf
+35 782 Td
+(Generated: 2026-10-20T09:59:14.311Z  |  Run ID: 2026-10-20T09-58-47-702Z  |  Tests: 30) Tj
+ET
+BT
+/F1 8 Tf
+35 770 Td
+(---------------------------------------------------------------------------------------------------) Tj
+ET
+BT
+/F1 4 Tf
+35 758 Td
+() Tj
+ET
+BT
+/F2 11 Tf
+35 750 Td
+(1. EXECUTIVE SUMMARY & EFFICIENCY VERDICT) Tj
+ET
+BT
+/F1 9 Tf
+35 735 Td
+(Verdict: Substantial Speedup: Router yielded 25.1% latency advantage over heavy-only execution.) Tj
+ET
+BT
+/F2 9 Tf
+35 722 Td
+(Efficiency Score: 44.4 / 100) Tj
+ET
+BT
+/F1 9 Tf
+35 709 Td
+(Heavy Baseline Model: llama3.1:8b) Tj
+ET
+BT
+/F1 4 Tf
+35 696 Td
+() Tj
+ET
+BT
+/F2 11 Tf
+35 688 Td
+(2. LATENCY & THROUGHPUT COMPARISON) Tj
+ET
+BT
+/F1 9 Tf
+35 673 Td
+(• Router Mean Latency: 24.7 s \(p50: 13.3 s\)) Tj
+ET
+BT
+/F1 9 Tf
+35 660 Td
+(• Heavy-Only Mean Latency: 33.0 s \(p50: 30.5 s\)) Tj
+ET
+BT
+/F2 9 Tf
+35 647 Td
+(• Latency Reduction: 25.1% efficiency gain) Tj
+ET
+BT
+/F1 9 Tf
+35 634 Td
+(• Average Tokens/Sec: Router 72.0 tok/s vs Heavy 16.8 tok/s) Tj
+ET
+BT
+/F1 4 Tf
+35 621 Td
+() Tj
+ET
+BT
+/F2 11 Tf
+35 613 Td
+(3. TOKEN USAGE & DIFFERENCE) Tj
+ET
+BT
+/F1 9 Tf
+35 598 Td
+(• Router Tokens: 14990 total \(1208 prompt + 13782 completion\)) Tj
+ET
+BT
+/F1 9 Tf
+35 585 Td
+(• Heavy Tokens:  15104 total \(790 prompt + 14314 completion\)) Tj
+ET
+BT
+/F2 9 Tf
+35 572 Td
+(• Token Usage Difference: Router used 114 fewer tokens \(0.8% difference\)) Tj
+ET
+BT
+/F1 4 Tf
+35 559 Td
+() Tj
+ET
+BT
+/F2 11 Tf
+35 551 Td
+(4. ROUTER TIER DISTRIBUTION) Tj
+ET
+BT
+/F1 9 Tf
+35 536 Td
+(• Light Tier: 13 \(43%\)) Tj
+ET
+BT
+/F1 9 Tf
+35 523 Td
+(• Code Tier:  9 \(30%\)) Tj
+ET
+BT
+/F1 9 Tf
+35 510 Td
+(• Heavy Tier: 8 \(27%\)) Tj
+ET
+BT
+/F1 4 Tf
+35 497 Td
+() Tj
+ET
+BT
+/F2 11 Tf
+35 489 Td
+(5. DETAILED TEST CASE BREAKDOWN \(Top Cases\)) Tj
+ET
+BT
+/F2 8 Tf
+35 474 Td
+(Test ID       Router Tier R-Lat\(ms\)   H-Lat\(ms\)   Saved\(ms\)   Eff %     Tok Diff  ) Tj
+ET
+BT
+/F1 8 Tf
+35 462 Td
+(---------------------------------------------------------------------------------------------------) Tj
+ET
+BT
+/F1 8 Tf
+35 450 Td
+(eval-001      light       3210        7616        4405        58%       7         ) Tj
+ET
+BT
+/F1 8 Tf
+35 438 Td
+(eval-002      light       3839        35181       31341       89%       180       ) Tj
+ET
+BT
+/F1 8 Tf
+35 426 Td
+(eval-003      light       2470        6119        3649        60%       -3        ) Tj
+ET
+BT
+/F1 8 Tf
+35 414 Td
+(eval-004      light       2540        5067        2526        50%       -19       ) Tj
+ET
+BT
+/F1 8 Tf
+35 402 Td
+(eval-005      light       2180        5844        3664        63%       -10       ) Tj
+ET
+BT
+/F1 8 Tf
+35 390 Td
+(eval-006      light       2525        5269        2743        52%       -19       ) Tj
+ET
+BT
+/F1 8 Tf
+35 378 Td
+(eval-007      light       2918        16126       13208       82%       77        ) Tj
+ET
+BT
+/F1 8 Tf
+35 366 Td
+(eval-008      light       2138        4243        2105        50%       -19       ) Tj
+ET
+BT
+/F1 8 Tf
+35 354 Td
+(eval-009      light       2149        4668        2519        54%       -19       ) Tj
+ET
+BT
+/F1 8 Tf
+35 342 Td
+(eval-010      light       2156        6246        4090        65%       13        ) Tj
+ET
+BT
+/F1 8 Tf
+35 330 Td
+(eval-011      code        26801       23441       -3360       -14%      10        ) Tj
+ET
+BT
+/F1 8 Tf
+35 318 Td
+(eval-012      code        30894       32831       1937        6%        -93       ) Tj
+ET
+BT
+/F1 8 Tf
+35 306 Td
+(eval-013      code        8049        13247       5198        39%       46        ) Tj
+ET
+BT
+/F1 8 Tf
+35 294 Td
+(eval-014      code        13253       26450       13196       50%       170       ) Tj
+ET
+BT
+/F1 8 Tf
+35 282 Td
+(eval-015      code        28845       30505       1660        5%        -94       ) Tj
+ET
+BT
+/F1 8 Tf
+35 270 Td
+(eval-016      code        13080       43633       30553       70%       468       ) Tj
+ET
+BT
+ET
+
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Contents 8 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+8 0 obj
+<< /Length 1588 >>
+stream
+BT
+/F1 8 Tf
+35 800 Td
+(eval-017      light       7987        31393       23406       75%       -137      ) Tj
+ET
+BT
+/F1 8 Tf
+35 788 Td
+(eval-018      code        23858       30434       6576        22%       12        ) Tj
+ET
+BT
+/F1 8 Tf
+35 776 Td
+(eval-019      code        30229       30543       314         1%        -123      ) Tj
+ET
+BT
+/F1 8 Tf
+35 764 Td
+(eval-020      code        16976       29786       12810       43%       125       ) Tj
+ET
+BT
+/F1 8 Tf
+35 752 Td
+(eval-021      heavy       63671       82611       18941       23%       289       ) Tj
+ET
+BT
+/F1 8 Tf
+35 740 Td
+(eval-022      heavy       51650       46586       -5064       -11%      -76       ) Tj
+ET
+BT
+/F1 8 Tf
+35 728 Td
+(eval-023      heavy       59058       55854       -3204       -6%       -41       ) Tj
+ET
+BT
+/F1 8 Tf
+35 716 Td
+(eval-024      heavy       96552       71384       -25168      -35%      -338      ) Tj
+ET
+BT
+/F1 8 Tf
+35 704 Td
+(eval-025      heavy       26871       20382       -6489       -32%      -123      ) Tj
+ET
+BT
+/F1 8 Tf
+35 692 Td
+(eval-026      light       7775        54009       46234       86%       41        ) Tj
+ET
+BT
+/F1 8 Tf
+35 680 Td
+(eval-027      heavy       82417       68651       -13766      -20%      -200      ) Tj
+ET
+BT
+/F1 8 Tf
+35 668 Td
+(eval-028      heavy       63928       76461       12532       16%       193       ) Tj
+ET
+BT
+/F1 8 Tf
+35 656 Td
+(eval-029      heavy       53946       59725       5779        10%       62        ) Tj
+ET
+BT
+/F1 8 Tf
+35 644 Td
+(eval-030      light       10260       66452       56192       85%       -265      ) Tj
+ET
+BT
+ET
+
+endstream
+endobj
+xref
+0 9
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000121 00000 n 
+0000000191 00000 n 
+0000000266 00000 n 
+0000000408 00000 n 
+0000004392 00000 n 
+0000004534 00000 n 
+trailer
+<< /Size 9 /Root 1 0 R >>
+startxref
+6174
+%%EOF

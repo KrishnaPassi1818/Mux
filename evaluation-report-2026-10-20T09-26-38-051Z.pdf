@@ -1,0 +1,228 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Contents 6 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+6 0 obj
+<< /Length 3272 >>
+stream
+BT
+/F2 14 Tf
+35 800 Td
+(EVALUATION REPORT: ROUTER AUTO-SELECTION VS HEAVY-ONLY LLM) Tj
+ET
+BT
+/F1 8 Tf
+35 782 Td
+(Generated: 2026-10-20T09:29:17.207Z  |  Run ID: 2026-10-20T09-26-38-051Z  |  Tests: 10) Tj
+ET
+BT
+/F1 8 Tf
+35 770 Td
+(---------------------------------------------------------------------------------------------------) Tj
+ET
+BT
+/F1 4 Tf
+35 758 Td
+() Tj
+ET
+BT
+/F2 11 Tf
+35 750 Td
+(1. EXECUTIVE SUMMARY & EFFICIENCY VERDICT) Tj
+ET
+BT
+/F1 9 Tf
+35 735 Td
+(Verdict: Outstanding Efficiency: Router saved 71.5% inference latency and offloaded 100% of queries away from heavy VRAM.) Tj
+ET
+BT
+/F2 9 Tf
+35 722 Td
+(Efficiency Score: 82.9 / 100) Tj
+ET
+BT
+/F1 9 Tf
+35 709 Td
+(Heavy Baseline Model: llama3.1:8b) Tj
+ET
+BT
+/F1 4 Tf
+35 696 Td
+() Tj
+ET
+BT
+/F2 11 Tf
+35 688 Td
+(2. LATENCY & THROUGHPUT COMPARISON) Tj
+ET
+BT
+/F1 9 Tf
+35 673 Td
+(• Router Mean Latency: 2.56 s \(p50: 2.46 s\)) Tj
+ET
+BT
+/F1 9 Tf
+35 660 Td
+(• Heavy-Only Mean Latency: 8.97 s \(p50: 6.40 s\)) Tj
+ET
+BT
+/F2 9 Tf
+35 647 Td
+(• Latency Reduction: 71.5% efficiency gain) Tj
+ET
+BT
+/F1 9 Tf
+35 634 Td
+(• Average Tokens/Sec: Router 138.3 tok/s vs Heavy 18.1 tok/s) Tj
+ET
+BT
+/F1 4 Tf
+35 621 Td
+() Tj
+ET
+BT
+/F2 11 Tf
+35 613 Td
+(3. TOKEN USAGE & DIFFERENCE) Tj
+ET
+BT
+/F1 9 Tf
+35 598 Td
+(• Router Tokens: 715 total \(356 prompt + 359 completion\)) Tj
+ET
+BT
+/F1 9 Tf
+35 585 Td
+(• Heavy Tokens:  912 total \(166 prompt + 746 completion\)) Tj
+ET
+BT
+/F2 9 Tf
+35 572 Td
+(• Token Usage Difference: Router used 197 fewer tokens \(21.6% difference\)) Tj
+ET
+BT
+/F1 4 Tf
+35 559 Td
+() Tj
+ET
+BT
+/F2 11 Tf
+35 551 Td
+(4. ROUTER TIER DISTRIBUTION) Tj
+ET
+BT
+/F1 9 Tf
+35 536 Td
+(• Light Tier: 10 \(100%\)) Tj
+ET
+BT
+/F1 9 Tf
+35 523 Td
+(• Code Tier:  0 \(0%\)) Tj
+ET
+BT
+/F1 9 Tf
+35 510 Td
+(• Heavy Tier: 0 \(0%\)) Tj
+ET
+BT
+/F1 4 Tf
+35 497 Td
+() Tj
+ET
+BT
+/F2 11 Tf
+35 489 Td
+(5. DETAILED TEST CASE BREAKDOWN \(Top Cases\)) Tj
+ET
+BT
+/F2 8 Tf
+35 474 Td
+(Test ID       Router Tier R-Lat\(ms\)   H-Lat\(ms\)   Saved\(ms\)   Eff %     Tok Diff  ) Tj
+ET
+BT
+/F1 8 Tf
+35 462 Td
+(---------------------------------------------------------------------------------------------------) Tj
+ET
+BT
+/F1 8 Tf
+35 450 Td
+(eval-001      light       3211        7149        3939        55%       7         ) Tj
+ET
+BT
+/F1 8 Tf
+35 438 Td
+(eval-002      light       3598        31846       28248       89%       202       ) Tj
+ET
+BT
+/F1 8 Tf
+35 426 Td
+(eval-003      light       2226        6692        4466        67%       5         ) Tj
+ET
+BT
+/F1 8 Tf
+35 414 Td
+(eval-004      light       2406        4758        2352        49%       -19       ) Tj
+ET
+BT
+/F1 8 Tf
+35 402 Td
+(eval-005      light       2204        5609        3405        61%       -9        ) Tj
+ET
+BT
+/F1 8 Tf
+35 390 Td
+(eval-006      light       2490        4640        2150        46%       -30       ) Tj
+ET
+BT
+/F1 8 Tf
+35 378 Td
+(eval-007      light       2492        12368       9876        80%       68        ) Tj
+ET
+BT
+/F1 8 Tf
+35 366 Td
+(eval-008      light       2385        5239        2854        54%       -19       ) Tj
+ET
+BT
+/F1 8 Tf
+35 354 Td
+(eval-009      light       2465        4994        2529        51%       -19       ) Tj
+ET
+BT
+/F1 8 Tf
+35 342 Td
+(eval-010      light       2130        6404        4274        67%       11        ) Tj
+ET
+BT
+ET
+
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000000260 00000 n 
+0000000402 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+3726
+%%EOF

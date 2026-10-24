@@ -1,0 +1,296 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R 7 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Contents 6 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+6 0 obj
+<< /Length 4143 >>
+stream
+BT
+/F2 16 Tf
+40 800 Td
+(LLM Router - Benchmark Evaluation Report) Tj
+ET
+BT
+/F1 9 Tf
+40 780 Td
+(Generated: 2026-10-18T14:16:40.115Z  |  Run ID: 2026-10-18T12-21-43-083Z) Tj
+ET
+BT
+/F1 9 Tf
+40 767 Td
+(---------------------------------------------------------------------------------------------------) Tj
+ET
+BT
+/F1 5 Tf
+40 754 Td
+() Tj
+ET
+BT
+/F2 12 Tf
+40 745 Td
+(1. EXECUTIVE SUMMARY & VERDICT) Tj
+ET
+BT
+/F1 10 Tf
+40 729 Td
+(Verdict: Router reduced mean latency by 21.5% vs heavy-only \(KPI-2 target of 30% lower not met\).) Tj
+ET
+BT
+/F1 9 Tf
+40 715 Td
+(Hardware: linux x64; AMD Ryzen 7 7435HS; 24.9 GB RAM; GPU: not detected) Tj
+ET
+BT
+/F1 9 Tf
+40 702 Td
+(Total Prompts: 72 labeled test prompts) Tj
+ET
+BT
+/F1 9 Tf
+40 689 Td
+(Date Executed: 10/18/2026, 6:57:00 PM) Tj
+ET
+BT
+/F1 6 Tf
+40 676 Td
+() Tj
+ET
+BT
+/F2 12 Tf
+40 666 Td
+(2. KEY PERFORMANCE INDICATORS \(KPIS\)) Tj
+ET
+BT
+/F1 9 Tf
+40 650 Td
+(• KPI-1 Routing Accuracy: 100% \(Target: 85% | Pass: YES\)) Tj
+ET
+BT
+/F1 9 Tf
+40 637 Td
+(• KPI-2 Latency Reduction: 21.5% \(Target: 30% | Pass: NO\)) Tj
+ET
+BT
+/F1 9 Tf
+40 624 Td
+(• KPI-3 Cache Hit Rate \(Run C\): 58%) Tj
+ET
+BT
+/F1 6 Tf
+40 611 Td
+() Tj
+ET
+BT
+/F2 12 Tf
+40 601 Td
+(3. DETAILED RUN METRICS SUMMARY) Tj
+ET
+BT
+/F2 9 Tf
+40 585 Td
+(Metric                  Run A \(Heavy Only\)  Run B \(Router\)      Run C \(Router+Cache ) Tj
+ET
+BT
+/F1 9 Tf
+40 572 Td
+(---------------------------------------------------------------------------------------------------) Tj
+ET
+BT
+/F1 9 Tf
+40 559 Td
+(Mean Latency            21.6 s              16.9 s              7.08 s              ) Tj
+ET
+BT
+/F1 9 Tf
+40 546 Td
+(p50 Latency             22.1 s              9.94 s              45 ms               ) Tj
+ET
+BT
+/F1 9 Tf
+40 533 Td
+(p95 Latency             44.7 s              47.5 s              37.3 s              ) Tj
+ET
+BT
+/F1 9 Tf
+40 520 Td
+(TTFT Mean               161 ms              433 ms              114 ms              ) Tj
+ET
+BT
+/F1 9 Tf
+40 507 Td
+(Tokens / Sec            20.6 tok/s          63.7 tok/s          63.5 tok/s          ) Tj
+ET
+BT
+/F1 9 Tf
+40 494 Td
+(Model Swaps             72                  72                  60                  ) Tj
+ET
+BT
+/F1 9 Tf
+40 481 Td
+(Cache Hit Rate          0%                  0%                  58%                 ) Tj
+ET
+BT
+/F1 9 Tf
+40 468 Td
+(Routing Accuracy        -                   100%                100%                ) Tj
+ET
+BT
+/F1 9 Tf
+40 455 Td
+(Total Wall Time         1552.6 s            1218.9 s            1080.1 s            ) Tj
+ET
+BT
+/F1 6 Tf
+40 442 Td
+() Tj
+ET
+BT
+/F2 12 Tf
+40 432 Td
+(4. ROUTING CONFUSION MATRIX \(Run B\)) Tj
+ET
+BT
+/F2 9 Tf
+40 416 Td
+(Expected \\ Routed       light           code            heavy           ) Tj
+ET
+BT
+/F1 9 Tf
+40 403 Td
+(light                   24              0               0               ) Tj
+ET
+BT
+/F1 9 Tf
+40 390 Td
+(code                    0               24              0               ) Tj
+ET
+BT
+/F1 9 Tf
+40 377 Td
+(heavy                   0               0               24              ) Tj
+ET
+BT
+/F1 6 Tf
+40 364 Td
+() Tj
+ET
+BT
+/F2 12 Tf
+40 354 Td
+(5. METHODOLOGY & PROVENANCE) Tj
+ET
+BT
+/F1 8 Tf
+40 338 Td
+(Backend: Ollama local inference. Order: deterministic prompt-file order; A = forced) Tj
+ET
+BT
+/F1 8 Tf
+40 326 Td
+(heavy/no-cache, B = auto/no-cache, C = auto/cache-on over two full passes. Warm-up:) Tj
+ET
+BT
+/F1 8 Tf
+40 314 Td
+(before each run, one unmeasured forced-heavy request is completed; identical prompt and) Tj
+ET
+BT
+/F1 8 Tf
+40 302 Td
+(sampling settings are used. Cache is flushed before each run; for C it remains enabled) Tj
+ET
+BT
+/F1 8 Tf
+40 290 Td
+(for both passes. Cache results include labeled duplicate prompts. Latency is measured) Tj
+ET
+BT
+/F1 8 Tf
+40 278 Td
+(at the gateway from the successful request attempt through terminal SSE event;) Tj
+ET
+BT
+/F1 8 Tf
+40 266 Td
+(rate-limit backoff is excluded from per-request latency but included in total wall) Tj
+ET
+BT
+/F1 8 Tf
+40 254 Td
+(time. Router TTFT/tokens-per-second are reported from final usage metadata. Swap count) Tj
+ET
+BT
+/F1 8 Tf
+40 242 Td
+(is a proxy for non-cache-hit inference requests with positive final-chunk load_ms; it) Tj
+ET
+BT
+ET
+
+endstream
+endobj
+7 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Contents 8 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+8 0 obj
+<< /Length 522 >>
+stream
+BT
+/F1 8 Tf
+40 800 Td
+(is not an independent hardware swap counter. Routing accuracy and confusion matrix use) Tj
+ET
+BT
+/F1 8 Tf
+40 788 Td
+(the dry-run preview endpoint and expected tiers in prompts.json; this is not) Tj
+ET
+BT
+/F1 8 Tf
+40 776 Td
+(answer-quality evaluation. GPU/VRAM values are omitted when the stats contract reports) Tj
+ET
+BT
+/F1 8 Tf
+40 764 Td
+(them as unavailable. Mock-backend measurements are for smoke testing only and are not) Tj
+ET
+BT
+/F1 8 Tf
+40 752 Td
+(hardware performance claims.) Tj
+ET
+BT
+ET
+
+endstream
+endobj
+xref
+0 9
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000121 00000 n 
+0000000191 00000 n 
+0000000266 00000 n 
+0000000408 00000 n 
+0000004603 00000 n 
+0000004745 00000 n 
+trailer
+<< /Size 9 /Root 1 0 R >>
+startxref
+5318
+%%EOF

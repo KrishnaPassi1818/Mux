@@ -1,0 +1,203 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [5 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Contents 6 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> >>
+endobj
+6 0 obj
+<< /Length 2702 >>
+stream
+BT
+/F2 14 Tf
+35 800 Td
+(EVALUATION REPORT: ROUTER AUTO-SELECTION VS HEAVY-ONLY LLM) Tj
+ET
+BT
+/F1 8 Tf
+35 782 Td
+(Generated: 2026-10-23T15:07:53.790Z  |  Run ID: 2026-10-23T15-07-49-348Z  |  Tests: 5) Tj
+ET
+BT
+/F1 8 Tf
+35 770 Td
+(---------------------------------------------------------------------------------------------------) Tj
+ET
+BT
+/F1 4 Tf
+35 758 Td
+() Tj
+ET
+BT
+/F2 11 Tf
+35 750 Td
+(1. EXECUTIVE SUMMARY & EFFICIENCY VERDICT) Tj
+ET
+BT
+/F1 9 Tf
+35 735 Td
+(Verdict: Outstanding Efficiency: Router saved 78.8% inference latency and offloaded 100% of queries away from heavy VRAM.) Tj
+ET
+BT
+/F2 9 Tf
+35 722 Td
+(Efficiency Score: 87.3 / 100) Tj
+ET
+BT
+/F1 9 Tf
+35 709 Td
+(Heavy Baseline Model: llama3.1:8b) Tj
+ET
+BT
+/F1 4 Tf
+35 696 Td
+() Tj
+ET
+BT
+/F2 11 Tf
+35 688 Td
+(2. LATENCY & THROUGHPUT COMPARISON) Tj
+ET
+BT
+/F1 9 Tf
+35 673 Td
+(• Router Mean Latency: 3.35 s \(p50: 3.02 s\)) Tj
+ET
+BT
+/F1 9 Tf
+35 660 Td
+(• Heavy-Only Mean Latency: 15.8 s \(p50: 7.24 s\)) Tj
+ET
+BT
+/F2 9 Tf
+35 647 Td
+(• Latency Reduction: 78.8% efficiency gain) Tj
+ET
+BT
+/F1 9 Tf
+35 634 Td
+(• Average Tokens/Sec: Router 130.2 tok/s vs Heavy 14.4 tok/s) Tj
+ET
+BT
+/F1 4 Tf
+35 621 Td
+() Tj
+ET
+BT
+/F2 11 Tf
+35 613 Td
+(3. TOKEN USAGE & DIFFERENCE) Tj
+ET
+BT
+/F1 9 Tf
+35 598 Td
+(• Router Tokens: 595 total \(177 prompt + 418 completion\)) Tj
+ET
+BT
+/F1 9 Tf
+35 585 Td
+(• Heavy Tokens:  656 total \(82 prompt + 574 completion\)) Tj
+ET
+BT
+/F2 9 Tf
+35 572 Td
+(• Token Usage Difference: Router used 61 fewer tokens \(9.3% difference\)) Tj
+ET
+BT
+/F1 4 Tf
+35 559 Td
+() Tj
+ET
+BT
+/F2 11 Tf
+35 551 Td
+(4. ROUTER TIER DISTRIBUTION) Tj
+ET
+BT
+/F1 9 Tf
+35 536 Td
+(• Light Tier: 5 \(100%\)) Tj
+ET
+BT
+/F1 9 Tf
+35 523 Td
+(• Code Tier:  0 \(0%\)) Tj
+ET
+BT
+/F1 9 Tf
+35 510 Td
+(• Heavy Tier: 0 \(0%\)) Tj
+ET
+BT
+/F1 4 Tf
+35 497 Td
+() Tj
+ET
+BT
+/F2 11 Tf
+35 489 Td
+(5. DETAILED TEST CASE BREAKDOWN \(Top Cases\)) Tj
+ET
+BT
+/F2 8 Tf
+35 474 Td
+(Test ID       Router Tier R-Lat\(ms\)   H-Lat\(ms\)   Saved\(ms\)   Eff %     Tok Diff  ) Tj
+ET
+BT
+/F1 8 Tf
+35 462 Td
+(---------------------------------------------------------------------------------------------------) Tj
+ET
+BT
+/F1 8 Tf
+35 450 Td
+(eval-001      light       3627        20776       17150       83%       7         ) Tj
+ET
+BT
+/F1 8 Tf
+35 438 Td
+(eval-002      light       5086        39684       34599       87%       95        ) Tj
+ET
+BT
+/F1 8 Tf
+35 426 Td
+(eval-003      light       3015        7236        4221        58%       -14       ) Tj
+ET
+BT
+/F1 8 Tf
+35 414 Td
+(eval-004      light       2480        5199        2719        52%       -19       ) Tj
+ET
+BT
+/F1 8 Tf
+35 402 Td
+(eval-005      light       2556        6161        3605        59%       -8        ) Tj
+ET
+BT
+ET
+
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000000260 00000 n 
+0000000402 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+3156
+%%EOF
